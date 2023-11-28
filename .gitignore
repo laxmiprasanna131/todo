@@ -1,0 +1,60 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+vendor/
+
+# Optional: Cache directory
+.cache/
+
+# Optional: Compiled binary addons (if applicable)
+build/Release
+
+# Optional: Coverage directory
+coverage/
+
+# Optional: Grunt intermediate storage (if using Grunt)
+.grunt
+
+# Optional: Compiled Python files
+*.pyc
+
+# Optional: Compiled TypeScript files
+*.tsbuildinfo
+
+# Optional: macOS-specific files
+.DS_Store
+
+# Optional: Windows-specific files
+Thumbs.db
+Desktop.ini
+
+# Optional: Visual Studio Code settings
+.vscode/
+
+# Optional: Environment variables file
+.env
+
+# Optional: IDE (e.g., WebStorm) project files
+.idea/
+
+# Optional: OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
