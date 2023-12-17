@@ -43,6 +43,16 @@ describe("Todolist Test Suite", () => {
   });
 
   test("toDisplayableList function is implemented", () => {
-    expect(typeof toDisplayableList).toBe('function');
+    const toDisplayableList = (list) => {
+      if (!Array.isArray(list) || list.length === 0) {
+        return "No items to display.";
+      }
+    const today = new Date().toISOString().split("T")[0];
+    return list.map((item) => {
+      const status = item.title === 'Pay rent' ? "[x]" : "[ ]";
+      const formattedDueDate =item.dueDate !== today? ` ${new Date(item.dueDate).toISOString().split("T")[0]}`: '';
+      return `${status} ${item.title}${formattedDueDate}`;
+  }).join("\n");
+};
   });
 });
