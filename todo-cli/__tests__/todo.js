@@ -1,59 +1,61 @@
 /* eslint-disable no-undef */
-const todoList = require('../todo');
-const { all, markAsComplete, add, overdue, dueToday, dueLater, toDisplayableList } = todoList();
+const todoList = require("../todo");
 
-describe("Todolist Test Suite", () => {
-  beforeAll(() => {
-    // Add a test todo item before running the tests
+const { add, markAsComplete, all, dueToday, dueLater, overdue } = todoList();
+
+describe("Todo test suite", () => {
+  test("should add new todo", () => {
+    expect(all.length).toBe(0);
+    const date = new Date();
+    const yd = new Date(date);
+    const td = new Date(date);
+    td.setDate(date.getDate() + 1);
+    yd.setDate(date.getDate() - 1);
     add({
-      title: "Test todo",
+      title: "Todo test",
       completed: false,
-      dueDate: new Date().toLocaleDateString("en-CA")
+      dueDate: new Date().toLocaleDateString("en-CA"),
     });
+    add({
+      title: "Todo test",
+      completed: false,
+      dueDate: yd.toLocaleDateString("en-CA"),
+    });
+    add({
+      title: "Todo test",
+      completed: false,
+      dueDate: td.toLocaleDateString("en-CA"),
+    });
+    expect(all.length).toBe(3);
   });
 
-  test("Should add new todo", () => {
-    const todoItemsCount = all.length;
-    add({
-      title: "Test todo",
-      completed: false,
-      dueDate: new Date().toLocaleDateString("en-CA")
-    });
-    expect(all.length).toBe(todoItemsCount + 1);
-  });
+  test("should mark a todo as complete", () => {
+    // Ensure the todo is initially marked as incomplete
+    expect(all[0].completed).toBe(false);
 
-  test("Should mark a todo as complete", () => {
-    expect(all[0].completed).toBe(true);
+    // Mark the todo as complete
     markAsComplete(0);
+
+    // Ensure the todo is now marked as complete
     expect(all[0].completed).toBe(true);
   });
 
-  test("Should retrieve overdue items", () => {
-    const overdueItems = overdue();
-    expect(overdueItems.length).toBeGreaterThanOrEqual(0);
+  test("should retrive a todo as duetoday", () => {
+    expect(all.length).toBe(3);
+    const k = dueToday();
+    console.log(k);
+    expect(k.length).toBe(1);
   });
-
-  test("Should retrieve due today items", () => {
-    const dueTodayItems = dueToday();
-    expect(dueTodayItems.length).toBeGreaterThanOrEqual(0);
+  test("should retrive a todo as overdue", () => {
+    let k = [];
+    expect(k.length).toBe(0);
+    k = overdue();
+    expect(k.length).toBe(1);
   });
-
-  test("Should retrieve due later items", () => {
-    const dueLaterItems = dueLater();
-    expect(dueLaterItems.length).toBeGreaterThanOrEqual(0);
-  });
-
-  test("toDisplayableList function is implemented", () => {
-    // Your implementation of the toDisplayableList function
-    const list = [
-      { title: "Test todo", completed: false, dueDate: new Date().toLocaleDateString("en-CA") }
-      // Add more test data as needed
-    ];
-
-    const result = toDisplayableList(list);
-    
-    // Add your expectations for the result here based on your implementation
-    // For example, you can expect that the result is a non-empty string
-    expect(result).not.toBe("");
+  test("should retrive a todo as laterdue", () => {
+    let k = [];
+    expect(k.length).toBe(0);
+    k = dueLater();
+    expect(k.length).toBe(1);
   });
 });
