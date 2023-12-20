@@ -4,6 +4,7 @@ const { all, markAsComplete, add, overdue, dueToday, dueLater, toDisplayableList
 
 describe("Todolist Test Suite", () => {
   beforeAll(() => {
+    // Add a test todo item before running the tests
     add({
       title: "Test todo",
       completed: false,
@@ -43,16 +44,16 @@ describe("Todolist Test Suite", () => {
   });
 
   test("toDisplayableList function is implemented", () => {
-    const toDisplayableList = (list) => {
-      if (!Array.isArray(list) || list.length === 0) {
-        return "No items to display.";
-      }
-    const today = new Date().toISOString().split("T")[0];
-    return list.map((item) => {
-      const status = item.title === 'Pay rent' ? "[x]" : "[ ]";
-      const formattedDueDate =item.dueDate !== today? ` ${new Date(item.dueDate).toISOString().split("T")[0]}`: '';
-      return `${status} ${item.title}${formattedDueDate}`;
-  }).join("\n");
-};
+    // Your implementation of the toDisplayableList function
+    const list = [
+      { title: "Test todo", completed: false, dueDate: new Date().toLocaleDateString("en-CA") }
+      // Add more test data as needed
+    ];
+
+    const result = toDisplayableList(list);
+    
+    // Add your expectations for the result here based on your implementation
+    // For example, you can expect that the result is a non-empty string
+    expect(result).not.toBe("");
   });
 });
